@@ -9,6 +9,7 @@ import PlacementResources from "./pages/PlacementResources";
 import Events from "./pages/Events";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import ChatBot from "./pages/Chatbot";
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
         <Route path="/resources" element={<PlacementResources />} />
         <Route path="/events" element={<Events />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/chatbot" element={<ChatBot />}/>
         <Route path="*" element={<NotFound />} />
+
       </Routes>
     </Router>
   );

@@ -1,6 +1,83 @@
 [
-  { "id": 1, "name": "John Doe", "course": "B.Tech CS", "year": 2020 },
-  { "id": 2, "name": "Jane Smith", "course": "B.Tech EE", "year": 2019 },
-  { "id": 3, "name": "Alice Johnson", "course": "MBA", "year": 2021 },
-  { "id": 4, "name": "Bob Williams", "course": "B.Tech ME", "year": 2018 }
+  {
+    "id": 1,
+    "name": "Amit Sharma",
+    "course": "Computer Science",
+    "year": 2024,
+    "company": "Google",
+    "photo": "/images/image.png"
+  },
+  {
+    "id": 2,
+    "name": "Priya Patel",
+    "course": "Electronics",
+    "year": 2024,
+    "company": "Intel",
+    "photo": "/images/pooja.png"
+  },
+  {
+    "id": 3,
+    "name": "Rahul Verma",
+    "course": "Mechanical",
+    "year": 2023,
+    "company": "Tata Motors",
+    "photo": "/images/image.png"
+  },
+  {
+    "id": 4,
+    "name": "Sneha Gupta",
+    "course": "Information Technology",
+    "year": 2024,
+    "company": "Microsoft",
+    "photo": "/images/pooja.png"
+  },
+  {
+    "id": 5,
+    "name": "Karan Mehta",
+    "course": "Civil",
+    "year": 2022,
+    "company": "L&T",
+    "photo": "/images/image.png"
+  },
+  {
+    "id": 6,
+    "name": "Neha Joshi",
+    "course": "Computer Science",
+    "year": 2024,
+    "company": "Amazon",
+    "photo": "/images/pooja.png"
+  },
+  {
+    "id": 7,
+    "name": "Ravi Iyer",
+    "course": "Electrical",
+    "year": 2023,
+    "company": "Siemens",
+    "photo": "/images/pooja.png"
+  },
+  {
+    "id": 8,
+    "name": "Anjali Desai",
+    "course": "Computer Science",
+    "year": 2024,
+    "company": "Infosys",
+    "photo": "/images/pooja.png",
+      "circular": true
+  },
+  {
+    "id": 9,
+    "name": "Mohit Kumar",
+    "course": "Electronics",
+    "year": 2024,
+    "company": "Qualcomm",
+    "photo": "/images/image.png"
+  },
+  {
+    "id": 10,
+    "name": "Pooja Nair",
+    "course": "Information Technology",
+    "year": 2023,
+    "company": "Wipro",
+    "photo": "/images/pooja.png"
+  }
 ]

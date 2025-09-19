@@ -1,23 +1,30 @@
 import { useNavigate } from "react-router-dom";
+import { GraduationCap, User } from "lucide-react";
+import "./login.css";
 
 export default function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
-      <div className="p-8 bg-white shadow-lg rounded-2xl w-96">
-        <h1 className="text-2xl font-bold mb-4 text-center">Alumni Platform</h1>
+    <div className="webapp-bg flex h-screen items-center justify-center">
+      <div className="webapp-card">
+        <h1 className="title">🎓 Alumni Platform</h1>
+        <p className="subtitle">
+          connect, grow, and stay updated with your community
+        </p>
+
         <button
           onClick={() => navigate("/student")}
-          className="w-full p-3 bg-blue-600 text-white rounded-lg mb-2 hover:bg-blue-700"
+          className="login-btn student-btn"
         >
-          Login as Student
+          <User size={18} /> Login as Student
         </button>
+
         <button
           onClick={() => navigate("/alumni")}
-          className="w-full p-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
+          className="login-btn alumni-btn"
         >
-          Login as Alumni
+          <GraduationCap size={18} /> Login as Alumni
         </button>
       </div>
     </div>
