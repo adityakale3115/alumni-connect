@@ -47,8 +47,8 @@ export default function StudentDashboard() {
         <nav>
           <ul>
             <li><Link to="/student">Dashboard</Link></li>
-            <li><Link to="/know-seniors">Know Your Seniors</Link></li>
-            <li><Link to="/mentorship">Mentorship</Link></li>
+            <li><Link to="/student">Know Your Seniors</Link></li>
+            {/* <li><Link to="/mentorship">Mentorship</Link></li> */}
             <li><Link to="/chatbot">AI Chatbot</Link></li>
             <li><Link to="/summary">AI Placement Summarizer</Link></li>
             <li><Link to="/mentors">AI Alumni Matchmaking</Link></li>
