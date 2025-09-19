@@ -1,36 +1,33 @@
 import { useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  ArcElement,
   Tooltip,
-  Legend
+  Legend,
+  Title
 } from "chart.js";
 import { Link } from "react-router-dom";
-import "./student-dashboard.css";
+import "./placement-dashboard.css";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 const mockResources = [
-  { company:"Google", icon:"🟢", criteria:"CGPA>8, DSA & System Design", selected:10, placed:8 },
-  { company:"Microsoft", icon:"🔵", criteria:"OOPS & DBMS, CGPA>7.5", selected:12, placed:10 },
-  { company:"Amazon", icon:"🟠", criteria:"Leadership, CGPA>7", selected:15, placed:12 },
-  { company:"Apple", icon:"🍎", criteria:"iOS & DS, CGPA>8", selected:9, placed:8 },
-  { company:"Facebook", icon:"📘", criteria:"DSA & System Design, CGPA>7.5", selected:11, placed:9 },
-  { company:"Tesla", icon:"⚡", criteria:"Embedded & AI, CGPA>7", selected:8, placed:7 },
-  { company:"Netflix", icon:"🎬", criteria:"Backend & Microservices, CGPA>7.5", selected:10, placed:9 },
-  { company:"Adobe", icon:"🎨", criteria:"Creative Coding & OOPS, CGPA>7", selected:12, placed:10 },
-  { company:"Intel", icon:"💻", criteria:"Hardware & Algorithms, CGPA>7.5", selected:11, placed:10 },
-  { company:"IBM", icon:"🔹", criteria:"AI & Cloud, CGPA>7", selected:14, placed:12 },
-  { company:"Oracle", icon:"🟣", criteria:"DBMS & SQL, CGPA>7", selected:13, placed:11 },
-  { company:"Infosys", icon:"🟦", criteria:"Programming & Aptitude, CGPA>6.5", selected:15, placed:13 },
+  { company:"Google", icon:"🟢", criteria:"CGPA > 8, DSA & System Design", selected:10, placed:8 },
+  { company:"Microsoft", icon:"🔵", criteria:"OOPS & DBMS, CGPA > 7.5", selected:12, placed:10 },
+  { company:"Amazon", icon:"🟠", criteria:"Leadership, CGPA > 7", selected:15, placed:12 },
+  { company:"Apple", icon:"🍎", criteria:"iOS & DS, CGPA > 8", selected:9, placed:8 },
+  { company:"Meta", icon:"📘", criteria:"DSA & System Design, CGPA > 7.5", selected:11, placed:9 },
+  { company:"Tesla", icon:"⚡", criteria:"ML & Robotics, CGPA > 8", selected:8, placed:6 },
+  { company:"Netflix", icon:"🎬", criteria:"System Design, CGPA > 7", selected:10, placed:7 },
+  { company:"Adobe", icon:"🟥", criteria:"Design + Coding, CGPA > 7.5", selected:13, placed:10 },
+  { company:"Spotify", icon:"🎵", criteria:"DSA + Cloud, CGPA > 7", selected:7, placed:5 },
+  { company:"Oracle", icon:"🔴", criteria:"DBMS + SQL, CGPA > 7", selected:12, placed:9 },
 ];
 
 export default function PlacementResources() {
   const [selectedCompany, setSelectedCompany] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const chartData = selectedCompany && {
     labels: ["Students Selected", "Students Placed"],
@@ -38,51 +35,59 @@ export default function PlacementResources() {
       {
         label: selectedCompany.company,
         data: [selectedCompany.selected, selectedCompany.placed],
-        backgroundColor: ["#2563eb","#16a34a"]
-      }
-    ]
+        backgroundColor: ["#3b82f6", "#16a34a"], // blue + green
+        borderWidth: 1,
+      },
+    ],
   };
 
   const chartOptions = {
     responsive: true,
     plugins: {
-      legend: { display: false },
-      title: { display: true, text: "Placement Stats", font: { size: 18 } }
-    }
+      legend: { position: "bottom" },
+      title: { display: true, text: "Placement Stats", font: { size: 18 } },
+    },
   };
 
   return (
-    <div className="dashboard-layout">
-      {/* sidebar */}
-      <aside className="sidebar">
-        <h2 className="logo">🎓 Student Portal</h2>
+    <div>
+      {/* ✅ Navbar */}
+      <header className="navbar">
+        <Link to="/student" className="logo">🎓 Student Portal</Link>
+
+        <button 
+          className="nav-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
+        </button>
+
         <nav>
-          <ul>
+          <ul className={menuOpen ? "open" : ""}>
             <li><Link to="/student">Dashboard</Link></li>
-            <li><Link to="/know-seniors">Know Your Seniors</Link></li>
-            <li><Link to="/mentorship">Mentorship</Link></li>
             <li><Link to="/chatbot">AI Chatbot</Link></li>
-            <li><Link to="/summary">AI Placement Summarizer</Link></li>
-            <li><Link to="/matchmaking">AI Alumni Matchmaking</Link></li>
+            <li><Link to="/summary">AI Placement</Link></li>
+            <li><Link to="/mentors">Alumni Match</Link></li>
           </ul>
         </nav>
-      </aside>
+      </header>
 
-      {/* main content */}
+      {/* ✅ Main Content */}
       <main className="main-content">
         <header className="dashboard-header">
           <h1>📂 Placement Resources</h1>
+          <p className="subtitle">Click a company card to view placement stats</p>
         </header>
 
         <div className="grid">
-          {mockResources.map((res,i)=>(
+          {mockResources.map((res, i) => (
             <div
               key={i}
-              className="card cursor-pointer hover:shadow-xl transition"
-              onClick={()=>setSelectedCompany(res)}
+              className="card"
+              onClick={() => setSelectedCompany(res)}
             >
-              <div className="card-content flex items-center gap-4 justify-center">
-                <div className="text-3xl">{res.icon}</div>
+              <div className="card-content">
+                <div className="icon">{res.icon}</div>
                 <div>
                   <h3>{res.company}</h3>
                   <p>{res.criteria}</p>
@@ -92,14 +97,14 @@ export default function PlacementResources() {
           ))}
         </div>
 
-        {/* modal */}
+        {/* ✅ Modal */}
         {selectedCompany && (
-          <div className="modal-overlay" onClick={()=>setSelectedCompany(null)}>
-            <div className="modal-card" onClick={e => e.stopPropagation()}>
-              <button className="modal-close" onClick={()=>setSelectedCompany(null)}>✖</button>
-              <h2 className="text-2xl font-bold mb-4">{selectedCompany.company}</h2>
-              <p className="text-gray-600 mb-4">Criteria: {selectedCompany.criteria}</p>
-              <Bar data={chartData} options={chartOptions} />
+          <div className="modal-overlay" onClick={() => setSelectedCompany(null)}>
+            <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close" onClick={() => setSelectedCompany(null)}>✖</button>
+              <h2 className="modal-title">{selectedCompany.company}</h2>
+              <p className="modal-subtitle">Criteria: {selectedCompany.criteria}</p>
+              <Pie data={chartData} options={chartOptions} />
             </div>
           </div>
         )}

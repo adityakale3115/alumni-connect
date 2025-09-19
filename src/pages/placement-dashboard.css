@@ -1,0 +1,190 @@
+/* ==== Navbar ==== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e293b;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar .logo {
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar nav ul li a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar nav ul li a:hover {
+  color: #fff;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar nav ul {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 3.5rem;
+    flex-direction: column;
+    background: #1e293b;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  .navbar nav ul.open {
+    display: flex;
+  }
+  .nav-toggle {
+    display: block;
+  }
+}
+
+/* ==== Main Content ==== */
+.main-content {
+  padding: 2rem;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.dashboard-header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #111827;
+}
+
+.dashboard-header .subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ==== Grid & Cards ==== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+
+.card-content .icon {
+  font-size: 2rem;
+}
+
+.card-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-top: 0.25rem;
+}
+
+/* ==== Modal ==== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  animation: popIn 0.3s ease;
+}
+
+.modal-title {
+  margin-bottom: 0.5rem;
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.modal-subtitle {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #111827;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

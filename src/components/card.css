@@ -1,34 +1,100 @@
+:root{
+  --card-bg: #ffffff;
+  --card-radius: 1rem;
+  --card-padding: 1.5rem;
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  --card-shadow-hover: 0 8px 20px rgba(0,0,0,0.12);
+  --accent: #2563eb;
+  --text: #111827;
+  --muted: #4b5563;
+  --transition-duration: 220ms;
+}
+
+/* Base card */
 .card {
-  background: #ffffff;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
   cursor: pointer;
+  will-change: transform, box-shadow;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+/* Use translateY for hover to avoid layout shift and keep crisp text */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .card:active {
+    transform: translateY(-2px);
+  }
 }
 
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .card, .card:hover, .card:active {
+    transition: none;
+    transform: none;
+    will-change: auto;
+  }
+}
+
+/* Focus state for keyboard users */
+.card:focus,
+.card:focus-visible {
+  outline: 3px solid rgba(37,99,235,0.16);
+  outline-offset: 6px;
+  box-shadow: 0 10px 24px rgba(37,99,235,0.06);
+}
+
+/* Keep hover subtle on touch devices by avoiding heavy transforms (handled above) */
+.card:active {
+  /* fallback for devices without (hover: hover) support */
+  transform: translateY(-2px);
+}
+
+/* Icon / title / body styling */
 .card-icon {
   font-size: 2rem;
-  color: #2563eb; /* tailwind blue-600 */
+  color: var(--accent);
+  line-height: 1;
+  display: inline-block;
 }
 
 .card-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #111827; /* tailwind gray-900 */
+  color: var(--text);
+  margin: 0;
 }
 
 .card-body {
   font-size: 0.95rem;
-  color: #4b5563; /* tailwind gray-600 */
+  color: var(--muted);
   line-height: 1.4;
+  margin: 0;
+}
+
+/* Optional: ensure consistent min-height to avoid different card heights jumping */
+.card[data-min-height="true"] {
+  min-height: 12rem; /* tweak as needed */
+}
+
+/* Dark theme overrides (if you use a data-theme attribute) */
+:root[data-theme="dark"] {
+  --card-bg: #0b1220;
+  --card-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  --card-shadow-hover: 0 12px 28px rgba(0,0,0,0.7);
+  --text: #e6eef8;
+  --muted: #9aa6b2;
+  --accent: #60a5fa;
 }

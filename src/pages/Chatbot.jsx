@@ -1,24 +1,27 @@
 // src/pages/ChatBot.jsx
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./chatbot.css";
 
 export default function ChatBot() {
   const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello! I am your AI chatbot. Ask me anything about alumni or seniors you can contact." }
+    {
+      sender: "bot",
+      text: "Hello! I am your AI chatbot. Ask me anything about alumni or seniors you can contact.",
+    },
   ]);
   const [input, setInput] = useState("");
 
   const handleSend = () => {
     if (!input.trim()) return;
 
-    // add user message
     setMessages([...messages, { sender: "user", text: input }]);
 
-    // simple demo response
-    const response = "Based on your details, you should contact seniors from your branch with high CGPA and relevant internships.";
+    const response =
+      "Based on your details, you should contact seniors from your branch with high CGPA and relevant internships.";
 
     setTimeout(() => {
-      setMessages(prev => [...prev, { sender: "bot", text: response }]);
+      setMessages((prev) => [...prev, { sender: "bot", text: response }]);
     }, 500);
 
     setInput("");
@@ -29,22 +32,29 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="dashboard-layout">
-      <aside className="sidebar">
-        <h2 className="logo">🎓 Student Portal</h2>
-        <nav>
-          <ul>
-            <li><a href="/student">Dashboard</a></li>
-            <li><a href="/directory">Alumni Directory</a></li>
-            <li><a href="/mentors">Mentorship</a></li>
-            <li><a href="/events">Events</a></li>
-            <li><a href="/chatbot">AI Chatbot</a></li>
-          </ul>
-        </nav>
-      </aside>
+    <div className="dashboard enhanced">
+      {/* Topbar */}
+      <header className="topbar">
+        <div className="topbar-inner">
+          <div className="brand">
+            <Link to="/" className="brand-link">
+              🎓 Student Portal
+            </Link>
+          </div>
 
-      <main className="main-content">
+          <nav className="nav">
+            <Link to="/student">Dashboard</Link>
+                        <Link to="/chatbot">AI Chatbot</Link>
+                        <Link to="/summary">AI Placement</Link>
+                        <Link to="/mentors">Alumni Match</Link>
+          </nav>
+        </div>
+      </header>
+
+      {/* Chat Section */}
+      <main className="container">
         <h2>AI Chatbot</h2>
+
         <div className="chat-window">
           {messages.map((msg, i) => (
             <div key={i} className={`chat-message ${msg.sender}`}>

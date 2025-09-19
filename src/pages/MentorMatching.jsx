@@ -1,34 +1,78 @@
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./a.css"
+
 const mockMentors = [
-  { name: "Anjali Verma", match: 95, photo: "https://via.placeholder.com/80" },
-  { name: "Karan Singh", match: 88, photo: "https://via.placeholder.com/80" },
-  { name: "Meena Reddy", match: 82, photo: "https://via.placeholder.com/80" },
+  { name: "Anjali Verma", match: 95, photo: "/images/pooja.png" },
+  { name: "Karan Singh", match: 88, photo: "/images/image.png" },
+  { name: "Meena Reddy", match: 82, photo: "/images/pooja.png" },
 ];
 
 export default function MentorMatching() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [requested, setRequested] = useState({});
+  const location = useLocation();
+
+  const handleRequest = (name) => {
+    setRequested((prev) => ({ ...prev, [name]: true }));
+  };
+
   return (
     <div className="dashboard-layout">
-      {/* sidebar */}
-      <aside className="sidebar">
-        <h2 className="logo">🎓 Student Portal</h2>
+      {/* ✅ Navbar */}
+      <header className="navbar">
+        <Link to="/student" className="logo">
+          🎓 Student Portal
+        </Link>
+
+        <button className="nav-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+          ☰
+        </button>
+
         <nav>
-          <ul>
-            <li><a href="/student">Dashboard</a></li>
-            <li><a href="/know-seniors">Know Your Seniors</a></li>
-            <li><a href="/mentorship">Mentorship</a></li>
-            <li><a href="/chatbot">AI Chatbot</a></li>
+          <ul className={menuOpen ? "open" : ""}>
+            <li>
+              <Link
+                to="/student"
+                className={location.pathname === "/student" ? "active" : ""}
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/chatbot"
+                className={location.pathname === "/chatbot" ? "active" : ""}
+              >
+                AI Chatbot
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/summary"
+                className={location.pathname === "/summary" ? "active" : ""}
+              >
+                AI Placement
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/mentors"
+                className={location.pathname === "/mentors" ? "active" : ""}
+              >
+                Alumni Match
+              </Link>
+            </li>
           </ul>
         </nav>
-      </aside>
+      </header>
 
-      {/* main content */}
+      {/* ✅ Main Content */}
       <main className="main-content">
-        <h1 className="text-3xl font-bold mb-6">🤝 Mentor Matching</h1>
+        <h1 className="page-title">🤝 Mentor Matching</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {mockMentors.map((mentor, index) => (
-            <div
-              key={index}
-              className="mentor-card"
-            >
+            <div key={index} className="mentor-card">
               <div className="mentor-info">
                 <img
                   src={mentor.photo}
@@ -47,7 +91,13 @@ export default function MentorMatching() {
                   <span>{mentor.match}%</span>
                 </div>
               </div>
-              <button className="btn-request">Request Session</button>
+              <button
+                className="btn-request"
+                onClick={() => handleRequest(mentor.name)}
+                disabled={requested[mentor.name]}
+              >
+                {requested[mentor.name] ? "✅ Requested" : "Request Session"}
+              </button>
             </div>
           ))}
         </div>
