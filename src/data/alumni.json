@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "John Doe", "course": "B.Tech CS", "year": 2020 },
+  { "id": 2, "name": "Jane Smith", "course": "B.Tech EE", "year": 2019 },
+  { "id": 3, "name": "Alice Johnson", "course": "MBA", "year": 2021 },
+  { "id": 4, "name": "Bob Williams", "course": "B.Tech ME", "year": 2018 }
+]
