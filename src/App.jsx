@@ -1,15 +1,18 @@
+// src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// pages
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import StudentDashboard from "./pages/StudentDashboard";
 import AlumniDashboard from "./pages/AlumniDashboard";
 import AlumniDirectory from "./pages/AlumniDirectory";
 import MentorMatching from "./pages/MentorMatching";
-import PlacementResources from "./pages/PlacementResources";
+import PlacementSummary from "./pages/PlacementSummary"; // note: PlacementResources.jsx
 import Events from "./pages/Events";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
-import ChatBot from "./pages/Chatbot";
+import ChatBot from "./pages/Chatbot"; // note: ChatBot.jsx
 
 function App() {
   return (
@@ -21,12 +24,11 @@ function App() {
         <Route path="/alumni" element={<AlumniDashboard />} />
         <Route path="/directory" element={<AlumniDirectory />} />
         <Route path="/mentors" element={<MentorMatching />} />
-        <Route path="/resources" element={<PlacementResources />} />
+        <Route path="/summary" element={<PlacementSummary />} />
         <Route path="/events" element={<Events />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/chatbot" element={<ChatBot />}/>
+        <Route path="/chatbot" element={<ChatBot />} />
         <Route path="*" element={<NotFound />} />
-
       </Routes>
     </Router>
   );
